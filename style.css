@@ -22,3 +22,24 @@
 h3 {
     font-weight:bold;
 }
+.btn {
+    display:block;
+    width:100%;
+    margin-top:15px;
+}
+#sidebar {
+    width:25%;
+}
+hr {
+  color:black;
+  }
+.flex-column {
+    width:100%;
+    border-radius: 50%;
+}
+.container {
+    margin:10px;
+    padding:5px;
+    width:75%;
+    height: fit-content;
+}
