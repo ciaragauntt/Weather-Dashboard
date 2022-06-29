@@ -55,7 +55,8 @@ hr {
     font-size:x-large;
 }
 .rowTitle {
-    margin-top:5%;
+    margin-top:10%;
+    display:flexbox;
 }
 h2 {
     font-weight:bold;
