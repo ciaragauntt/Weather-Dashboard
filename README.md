@@ -5,3 +5,6 @@
 
 # Links
 Deployed application: https://ciaragauntt.github.io/Weather-Dashboard/
+
+# Screenshot
+![2022-07-02 (3)](https://user-images.githubusercontent.com/103298079/177015949-ea078d62-ac08-4528-ba3e-ceeed739c250.png)
