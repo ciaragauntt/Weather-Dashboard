@@ -7,9 +7,9 @@ let cityEl = document.getElementById("cityName")
 let buttonEl = document.getElementById("search")
 let dateEl = document.getElementById("date")
 let cloudEl = document.getElementById("cloudicon")
-let data = async function () {
-    let inputvalue = document.getElementById("enterCity").value
-    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputvalue}&units=imperial&appid=c4f4d8f939cc3b3bf4bab7873fc3e3c4`).then(res => res.json()).then(data => data)
+let searchHistoryEl = document.getElementById("searchHistory")
+let weatherData = async function(cityName) {
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=c4f4d8f939cc3b3bf4bab7873fc3e3c4`).then(res => res.json()).then(data => data)
     //console.log(response);
     //console.log(response.coord.lat);
     tempEl.innerHTML = "Temp: " + response.main.temp;
@@ -53,6 +53,10 @@ let data = async function () {
     //   forcastCloudEl.innerHTML=`http://openweathermap.org/img/w/${forcastList[i].weather[0].icon}.png`;
     // }
 
+}
+let data = async function (cityName) {
+    // let inputvalue = document.getElementById("enterCity").value
+    weatherData(cityName);
     //local Storage info
     var new_data = document.getElementById('enterCity').value;
     if (localStorage.getItem('data') == null) {
@@ -60,13 +64,49 @@ let data = async function () {
     }
     var old_data = JSON.parse(localStorage.getItem('data'));
     old_data.push(new_data);
-
+    console.log(old_data);
     localStorage.setItem('data', JSON.stringify(old_data));
-    
+
+// add local storage to html as button
+loadSearchHistory();
+
+}
+function findWeatherDetails(){
+    let inputValue = document.getElementById("enterCity").value;
+    data(inputValue);
+}
+function loadSearchHistory() {
+    searchHistoryEl.innerHTML = "";
+    let cities = JSON.parse(localStorage.getItem('data')) || []
+    let ol = document.createElement("ol")
+    for(let i=0; i<cities.length; i++){
+        let listItem = document.createElement("li")
+        listItem.classList.add("no-style")
+        let button = document.createElement("button");
+        button.classList.add("history");
+        button.addEventListener('click', function (e){ 
+            console.log(e.target.innerHTML)
+            weatherData(e.target.innerHTML)
+    } )
+        button.innerHTML = cities[i]
+        listItem.appendChild(button)
+        ol.appendChild(listItem)
+    }
+    console.log(ol);
+
+    searchHistoryEl.append(ol);
+
+    var historyButtons = document.querySelectorAll(".history");
+    for(var i=0; i < historyButtons.length; i++) {
+        historyButtons[i].style.backgroundColor = "grey";
+        historyButtons[i].style.width = "100%";
+        historyButtons[i].style.padding = "10px";
+        historyButtons[i].style.display = "center";
+    }
 }
 
 // get the color to change with the UV index
 
-// get the city to save into local storage and display 
+loadSearchHistory();
 
-buttonEl.addEventListener("click", data);
+buttonEl.addEventListener("click", findWeatherDetails);

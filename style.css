@@ -70,3 +70,11 @@ h2 {
     background-color:#36454f;
     color: white;
 }
+.no-style {
+    list-style-type: none;
+    margin: 10%;
+
+}
+#weatherForcast {
+    margin-top: 13%;
+}
