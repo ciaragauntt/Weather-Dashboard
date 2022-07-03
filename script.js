@@ -20,7 +20,7 @@ let weatherData = async function(cityName) {
 
     //5 day forcast
 
-    let forcastdata = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${response.coord.lat}&lon=${response.coord.lat}&units=imperial&appid=c4f4d8f939cc3b3bf4bab7873fc3e3c4`).then(res => res.json()).then(data => data)
+    let forcastdata = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${response.coord.lat}&lon=${response.coord.lat}&units=imperial&appid=c4f4d8f939cc3b3bf4bab7873fc3e3c4`).then(res => res.json()).then(data => data)
     // console.log(forcastdata)
     let forcastList = forcastdata.list.slice(0, 5)
     console.log(forcastList)
